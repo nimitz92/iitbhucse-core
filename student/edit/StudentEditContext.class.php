@@ -1,0 +1,52 @@
+<?php 
+require_once(SBINTERFACES);
+
+/**
+ *	StudentEditContext class
+ *
+*	@param username	string			Username
+ *	@param password	string			Password
+ *	@param stname		string			Student name
+ *	@param strollno	string			Student roll no
+ *	@param stcourse	integer			Student course 1=BTech 2=IDD 3=PhD
+ *	@param styear		integer			Student year
+ *	@param conn 		resource 		Database connection
+ *	
+ *	@return valid 		boolean		Processed without errors
+ *	@return msg			string			Error message if any
+ *
+**/
+class StudentEditContext implements ContextService {
+
+	/**
+	 *	@interface ContextService
+	**/
+	public function getContext($model){
+		return $model;
+	}
+	
+	/**
+	 *	@interface ContextService
+	**/
+	public function setContext($context){
+		$conn = $model['conn'];
+		$stuid = $model['uid'];
+		$stname = $conn->escape($model['stname']);
+		$strollno = $conn->escape($model['strollno']);
+		$stcourse = $model['stcourse'];
+		$styear = $model['styear'];		
+		
+		$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear where stuid = $stuid;", true);
+		
+		if($result === false){
+			$model['valid'] = false;
+			$model['msg'] = 'Error in Database @setContext/student.edit';
+			return $model;
+		}
+		
+		$model['valid'] = true;
+		return $model;
+	}
+}
+
+?>
