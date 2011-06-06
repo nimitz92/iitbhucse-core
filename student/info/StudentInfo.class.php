@@ -23,12 +23,12 @@ class StudentInfo implements Operation {
 	
 	// Operation interface
 	public function getContextService(){
-		return new StudentCreateContext();
+		return new StudentInfoContext();
 	}
 	
 	// Operation interface
 	public function getTransformService(){
-		return new StudentCreateTransform();
+		return new StudentInfoTransform();
 	}
 	
 	// Operation interface

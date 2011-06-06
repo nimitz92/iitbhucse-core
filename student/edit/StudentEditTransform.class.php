@@ -6,7 +6,7 @@ require_once(SBCOMLOADER);
 /**
  *	StudentEditTransform class
  *
- *	@service enhancse-core.user.edit
+ *	@service enhancse-core.user.authenticate
  *
 **/
 class StudentEditTransform implements TransformService {
@@ -18,7 +18,7 @@ class StudentEditTransform implements TransformService {
 		$kernel = new ServiceKernel();
 		$cl = new ComponentLoader();
 		
-		$op = $cl->load("user.edit", ECROOT);
+		$op = $cl->load("user.authenticate", ECROOT);
 		$model = $kernel->run($op, $model);
 		
 		return $model;

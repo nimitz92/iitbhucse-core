@@ -23,12 +23,12 @@ class StudentDelete implements Operation {
 	
 	// Operation interface
 	public function getContextService(){
-		return new StudentCreateContext();
+		return new StudentDeleteContext();
 	}
 	
 	// Operation interface
 	public function getTransformService(){
-		return new StudentCreateTransform();
+		return new StudentDeleteTransform();
 	}
 	
 	// Operation interface
