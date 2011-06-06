@@ -3,9 +3,17 @@ require_once(SBINTERFACES);
 require_once(SBKERNEL);
 require_once(SBCOMLOADER);
 
+/**
+ *	StudentCreateTransform class
+ *
+ *	@service enhancse-core.user.register
+ *
+**/
 class StudentCreateTransform implements TransformService {
 
-	// TransformService interface
+	/**
+	 *	@interface TransformService
+	**/
 	public function transform($model){
 		$kernel = new ServiceKernel();
 		$cl = new ComponentLoader();
