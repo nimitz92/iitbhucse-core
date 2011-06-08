@@ -4,10 +4,10 @@ require_once(SBINTERFACES);
 /**
  *	CourseInfoContext class
  *	
- *	@param crsid		long int			Course ID
+ *	@param crsid			long int			Course ID
  *	@param conn 		resource 		Database connection
  *
- *  @return course    array			Course Information
+ *  @return course    	array			Course Information
  *	@return valid 		boolean		Processed without errors
  *	@return msg			string			Error message if any
  *

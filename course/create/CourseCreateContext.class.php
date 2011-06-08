@@ -5,13 +5,13 @@ require_once(SBINTERFACES);
  *	CourseCreateContext class
  *
  
- *  @param crsid        long integer    Course ID
- *	@param crsname		string			Course name
- *	@param csdescription	string		Course Description
- *	@param conn 		resource 		Database connection
+ *  @param crsid        			long integer	Course ID
+ *	@param crsname			string			Course name
+ *	@param crsdescription		string			Course Description
+ *	@param conn 				resource 		Database connection
  *
- *	@return valid 		boolean		Processed without errors
- *	@return msg			string			Error message if any
+ *	@return valid 				boolean		Processed without errors
+ *	@return msg					string			Error message if any
  *
 **/
 class CourseCreateContext implements ContextService {
@@ -20,7 +20,6 @@ class CourseCreateContext implements ContextService {
 	 *	@interface ContextService
 	**/
 	public function getContext($model){
-		$model['email'] = $model['stemail'];
 		return $model;
 	}
 	
@@ -36,7 +35,7 @@ class CourseCreateContext implements ContextService {
 		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database';
+			$model['msg'] = 'Error in Database @setContext/course.create';
 			return $model;
 		}
 		

@@ -4,9 +4,9 @@ require_once(SBINTERFACES);
 /**
  *	CourseEditContext class
  *
- *  @param crsid                    long integer     Course ID
- *	@param crsname		            string			Course name
- *	@param crsdescription	        string			Course Description
+ *  @param crsid                    long integer   Course ID
+ *	@param crsname		        string			Course name
+ *	@param crsdescription	    string			Course Description
  *	@param conn 		            resource 		Database connection
  *	
  *	@return valid 		            boolean		Processed without errors
