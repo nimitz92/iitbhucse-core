@@ -40,8 +40,8 @@ class StudentCreateContext implements ContextService {
 		$stemail = $conn->escape($model['stemail']);
 		$stcourse = $model['stcourse'];
 		$styear = $model['styear'];		
-		
-		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear);", true);
+		$stinterest = $conn->escape($model['stinterest']);
+		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear, stinterest) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, '$stinterest');", true);
 		
 		if($result === false){
 			$model['valid'] = false;
