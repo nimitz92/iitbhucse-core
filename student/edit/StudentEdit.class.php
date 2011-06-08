@@ -23,12 +23,12 @@ class StudentEdit implements Operation {
 	
 	// Operation interface
 	public function getContextService(){
-		return new StudentCreateContext();
+		return new StudentEditContext();
 	}
 	
 	// Operation interface
 	public function getTransformService(){
-		return new StudentCreateTransform();
+		return new StudentEditTransform();
 	}
 	
 	// Operation interface

@@ -6,7 +6,7 @@ require_once(SBCOMLOADER);
 /**
  *	StudentInfoTransform class
  *
- *	@service enhancse-core.user.edit
+ *	@service enhancse-core.user.info
  *
 **/
 class StudentInfoTransform implements TransformService {

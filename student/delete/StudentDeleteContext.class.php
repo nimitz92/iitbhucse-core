@@ -4,8 +4,8 @@ require_once(SBINTERFACES);
 /**
  *	StudentDeleteContext class
  *
+ *	@param stuid		long int			Student ID
  *	@param conn 		resource 		Database connection	
- *	@param stuid		long int			Student ID generated
  
  *	@return valid 		boolean		Processed without errors
  *	@return msg			string			Error message if any
@@ -17,7 +17,6 @@ class StudentDeleteContext implements ContextService {
 	 *	@interface ContextService
 	**/
 	public function getContext($model){
-		$model['email'] = $model['stemail'];
 		return $model;
 	}
 	
