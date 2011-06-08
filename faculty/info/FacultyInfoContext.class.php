@@ -4,10 +4,10 @@ require_once(SBINTERFACES);
 /**
  *	FacultyInfoContext class
  *	
- *	@param fid		long int			Faculty ID
+ *	@param fid			long int			Faculty ID
  *	@param conn 		resource 		Database connection
  *
- *  @return Faculty    array			Faculty Information
+ *  @return faculty    	array			Faculty information
  *	@return user			array			User information
  *	@return valid 		boolean		Processed without errors
  *	@return msg			string			Error message if any
@@ -37,9 +37,9 @@ class FacultyInfoContext implements ContextService {
 			return $model;
 		}
 		
-		$model['Faculty'] = $result[0];
+		$model['faculty'] = $result[0];
 		$model['valid'] = true;
-		$model['uid'] = $stuid;
+		$model['uid'] = $fid;
 		return $model;
 	}
 	

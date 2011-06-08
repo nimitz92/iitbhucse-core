@@ -4,7 +4,7 @@ require_once(SBINTERFACES);
 /**
  *	FacultyDeleteContext class
  *
- *	@param fid		long int			Faculty ID
+ *	@param fid			long int			Faculty ID
  *	@param conn 		resource 		Database connection	
  
  *	@return valid 		boolean		Processed without errors
@@ -25,7 +25,7 @@ class FacultyDeleteContext implements ContextService {
 	**/
 	public function setContext($context){
 		$conn = $model['conn'];
-		$stuid = $model['uid'];	
+		$fid = $model['uid'];	
 		
 		$result = $conn->getResult("delete from faculty where fid=$fid);", true);
 		

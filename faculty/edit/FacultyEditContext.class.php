@@ -4,17 +4,17 @@ require_once(SBINTERFACES);
 /**
  *	FacultyEditContext class
  *
-*	@param username	      string			Username
- *	@param password	      string			Password
- *	@param fname		  string			Faculty name
- *	@param fphone	      string			Faculty phone no
- *	@param fdesignation	  integer			Faculty designation 1=Professor 2=Assistant professor 3=Reader 4=Lecturer
- *  @param fqualification string            Faculty qualification 
- *  @param finterest      string            Faculty interests
- *	@param conn 		  resource 		Database connection
+*	@param username	      	string			Username
+ *	@param password	      	string			Password
+ *	@param fname		  		string			Faculty name
+ *	@param fphone	      		string			Faculty phone no
+ *	@param fdesignation	  	integer			Faculty designation 1=Professor 2=Assistant professor 3=Reader 4=Lecturer
+ *  @param fqualification 	string            Faculty qualification 
+ *  @param finterest      	string            Faculty interests
+ *	@param conn 		  		resource 		Database connection
  *	
- *	@return valid 		boolean		Processed without errors
- *	@return msg			string			Error message if any
+ *	@return valid 				boolean		Processed without errors
+ *	@return msg					string			Error message if any
  *
 **/
 class FacultyEditContext implements ContextService {

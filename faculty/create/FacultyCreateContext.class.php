@@ -4,19 +4,19 @@ require_once(SBINTERFACES);
 /**
  *	FacultyCreateContext class
  *
- *	@param fname		string			Faculty name
- *	@param fphone	    string			Faculty phone no
- *	@param femail		string			Faculty email
- *	@param fdesignation	integer			Faculty designation 1=Professor 2=Assistant professor 3=Reader 4=Lecturer
+ *	@param fname					string			Faculty name
+ *	@param fphone	    			string			Faculty phone no
+ *	@param femail					string			Faculty email
+ *	@param fdesignation			integer			Faculty designation 1=Professor 2=Assistant professor 3=Reader 4=Lecturer
  *	@param fqualification		string			Faculty qualification
- *	@param username	    string			Username
- *	@param subject		string			Subject
- *	@param message	    string			Message
- *	@param conn 		resource 		Database connection
+ *	@param username	   			string			Username
+ *	@param subject					string			Subject
+ *	@param message	    		string			Message
+ *	@param conn 					resource 		Database connection
  *	
- *	@return fid		long int			Faculty ID generated
- *	@return valid 		boolean		Processed without errors
- *	@return msg			string			Error message if any
+ *	@return fid						long int			Faculty ID generated
+ *	@return valid 					boolean		Processed without errors
+ *	@return msg						string			Error message if any
  *
 **/
 class FacultyCreateContext implements ContextService {
@@ -52,7 +52,7 @@ class FacultyCreateContext implements ContextService {
 		}
 		
 		$model['valid'] = true;
-		$model['fid'] = $fuid;
+		$model['fid'] = $fid;
 		return $model;
 	}
 }
