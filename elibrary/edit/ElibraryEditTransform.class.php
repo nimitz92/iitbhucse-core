@@ -15,7 +15,6 @@ class ElibraryEditTransform implements TransformService {
 	 *	@interface TransformService
 	**/
 	public function transform($model){
-		
 		return $model;
 	}
 }

@@ -4,15 +4,15 @@ require_once(SBINTERFACES);
 /**
  *	ElibraryEditContext class
  *
- *	@param bookid		string			Book storage ID
- *	@param bookname	string			Book name
- *	@param bookauthor		string		Book Author
- *	@param bookpages	integer			Pages in Book
+ *	@param bookid						string			Book storage ID
+ *	@param bookname					string			Book name
+ *	@param bookauthor				string			Book Author
+ *	@param bookpages					integer			Pages in Book
  *	@param bookdescription		string			Book Description
- *	@param conn 		resource 		Database connection
+ *	@param conn 						resource 		Database connection
  *	
- *	@return valid 		boolean		Processed without errors
- *	@return msg			string			Error message if any
+ *	@return valid 						boolean		Processed without errors
+ *	@return msg							string			Error message if any
  *
 **/
 class ElibraryEditContext implements ContextService {
@@ -45,7 +45,6 @@ class ElibraryEditContext implements ContextService {
 	 *	@interface ContextService
 	**/
 	public function setContext($context){
-		
 		return $model;
 	}
 }

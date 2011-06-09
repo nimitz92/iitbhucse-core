@@ -18,7 +18,24 @@ class ElibraryRemoveContext implements ContextService {
 	**/
 	public function getContext($model){
 		$conn = $model['conn'];
-		$model['stgid'] = $conn->escape($model['bookid']);
+		$bookid = $conn->escape($model['bookid']);
+		
+		$result = $conn->getResult("select bookid from elibrary where bookid = '$bookid';", true);
+		
+		if($result === false){
+			$model['valid'] = false;
+			$model['msg'] = 'Error in Database @getContext/elibrary.remove';
+			return $model;
+		}
+		
+		if(count($result) != 1){
+			$model['valid'] = false;
+			$model['msg'] = 'Invalid Book ID';
+			return $model;
+		}
+		
+		$model['valid'] = true;
+		$model['stgid'] = $result[0];
 		return $model;
 	}
 	
@@ -33,12 +50,11 @@ class ElibraryRemoveContext implements ContextService {
 		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database';
+			$model['msg'] = 'Error in Database @setContext/elibrary.remove';
 			return $model;
 		}
 		
 		$model['valid'] = true;
-		
 		return $model;
 	}
 }

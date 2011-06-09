@@ -18,15 +18,6 @@ class ElibraryGetContext implements ContextService {
 	 *	@interface ContextService
 	**/
 	public function getContext($model){
-		$conn = $model['conn']
-		$model['stgid'] = $conn->escape($model['bookid']);
-		return $model;
-	}
-	
-	/**
-	 *	@interface ContextService
-	**/
-	public function setContext($context){
 		$conn = $model['conn'];
 		$bookid = $conn->escape($model['bookid']);
 		
@@ -34,12 +25,25 @@ class ElibraryGetContext implements ContextService {
 		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database';
+			$model['msg'] = 'Error in Database @getContext/elibrary.get';
+			return $model;
+		}
+		
+		if(count($result) != 1){
+			$model['valid'] = false;
+			$model['msg'] = 'Invalid Book ID';
 			return $model;
 		}
 		
 		$model['valid'] = true;
 		$model['book'] = result[0];
+		return $model;
+	}
+	
+	/**
+	 *	@interface ContextService
+	**/
+	public function setContext($context){
 		return $model;
 	}
 }

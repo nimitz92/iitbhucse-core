@@ -4,15 +4,15 @@ require_once(SBINTERFACES);
 /**
  *	ElibraryAddContext class
  *
- *	@param bookid		string			Book storage ID
- *	@param bookname	string			Book name
- *	@param bookauthor		string		Book Author
- *	@param bookpages	integer			Pages in Book
- *	@param bookdescription		string			Book Description
- *	@param conn 		resource 		Database connection
+ *	@param bookid					string			Book storage ID
+ *	@param bookname				string			Book name
+ *	@param bookauthor			string		Book Author
+ *	@param bookpages				integer			Pages in Book
+ *	@param bookdescription	string			Book Description
+ *	@param conn 					resource 		Database connection
  *	
- *	@return valid 		boolean		Processed without errors
- *	@return msg			string			Error message if any
+ *	@return valid 					boolean		Processed without errors
+ *	@return msg						string			Error message if any
  *
 **/
 class ElibraryAddContext implements ContextService {
@@ -21,7 +21,6 @@ class ElibraryAddContext implements ContextService {
 	 *	@interface ContextService
 	**/
 	public function getContext($model){
-		
 		return $model;
 	}
 	

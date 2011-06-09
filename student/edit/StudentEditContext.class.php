@@ -4,21 +4,21 @@ require_once(SBINTERFACES);
 /**
  *	StudentEditContext class
  *
-*	@param username	string			Username
- *	@param password	string			Password
- *	@param stname		string			Student name
- *	@param strollno	string			Student roll no
- *	@param stcourse	integer			Student course 1=BTech 2=IDD 3=PhD
- *	@param styear		integer			Student year
- *  @param stinterest   string          Student Interest
- *  @param stcgpa       string          Student CGPA
- *  @param stplacement  string          Student Placement Status
- *  @param stinternship string          Student Internship Status
- *  @param stresume     string          Student Resume storage id
- *	@param conn 		resource 		Database connection
+*	@param username		string			Username
+ *	@param password		string			Password
+ *	@param stname			string			Student name
+ *	@param strollno		string			Student roll no
+ *	@param stcourse		integer			Student course 1=BTech 2=IDD 3=PhD
+ *	@param styear			integer			Student year
+ *  @param stinterest   	string          	Student Interest
+ *  @param stcgpa      	string          	Student CGPA
+ *  @param stplacement 	string          	Student Placement Status
+ *  @param stinternship 	string          	Student Internship Status
+ *  @param stresume     	string          	Student Resume storage id
+ *	@param conn 			resource 		Database connection
  *	
- *	@return valid 		boolean		Processed without errors
- *	@return msg			string			Error message if any
+ *	@return valid 			boolean		Processed without errors
+ *	@return msg				string			Error message if any
  *
 **/
 class StudentEditContext implements ContextService {
