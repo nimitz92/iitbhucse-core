@@ -8,6 +8,7 @@ require_once(SBINTERFACES);
  *	@param fphone	    			string			Faculty phone no
  *	@param femail					string			Faculty email
  *	@param fdesignation			integer			Faculty designation 1=Professor 2=Assistant professor 3=Reader 4=Lecturer
+ *  @param fstatus				integer			Faculty Status 1=Teaching 2=Retired
  *	@param fqualification		string			Faculty qualification
  *	@param username	   			string			Username
  *	@param subject					string			Subject
@@ -37,13 +38,15 @@ class FacultyCreateContext implements ContextService {
 		$fid = $model['uid'];
 		$conn = $model['conn'];
 		$fid = $model['uid'];
-		$fname = $conn->escape($model['stname']);
+		$fname = $conn->escape($model['fname']);
 		$fdesignation = $model['fdesignation'];
 		$fphone = $conn->escape($model['fphone']);
 		$fqualification = $conn->escape($model['fqualification']);		
 		$femail = $conn->escape($model['femail']);
 		$finterset = $conn->escape($model['finterset']);
-		$result = $conn->getResult("insert into faculty (fid, fname, fdesignation, fqualification, femail, fphone, finterest) values ($fid, '$fname', $fdesignation, '$fqualification', '$femail', '$fphone', '$finterest');", true);
+		$fstatus = $model['fatatus'];
+		
+		$result = $conn->getResult("insert into faculty (fid, fname, fdesignation, fqualification, femail, fphone, finterest, fstatus) values ($fid, '$fname', $fdesignation, '$fqualification', '$femail', '$fphone', '$finterest', $fstatus);", true);
 		
 		if($result === false){
 			$model['valid'] = false;
