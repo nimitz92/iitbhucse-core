@@ -11,6 +11,7 @@ require_once(SBINTERFACES);
  *	@param fdesignation	  	integer			Faculty designation 1=Professor 2=Assistant professor 3=Reader 4=Lecturer
  *  @param fqualification 	string            Faculty qualification 
  *  @param finterest      	string            Faculty interests
+ *  @param fstatus			integer				Faculty Status 1=Teaching 2=Retired 
  *	@param conn 		  		resource 		Database connection
  *	
  *	@return valid 				boolean		Processed without errors
@@ -32,12 +33,14 @@ class FacultyEditContext implements ContextService {
 	public function setContext($context){
 		$conn = $model['conn'];
 		$fid = $model['uid'];
-		$fname = $conn->escape($model['stname']);
+		$fname = $conn->escape($model['fname']);
 		$fdesignation = $model['fdesignation'];
 		$fphone = $conn->escape($model['fphone']);
 		$fqualification = $conn->escape($model['fqualification']);
-		$finterest = $conn->escape($model['finterest']);		
-		$result = $conn->getResult("update faculty set fname = '$fname', fphoneno = '$fphoneno', fdesignation = $fdesignation, fqualification = '$fqualification' finterest = '$finterest' where fid = $fid;", true);
+		$finterest = $conn->escape($model['finterest']);
+		$fstatus = $model['fstatus'];
+		
+		$result = $conn->getResult("update faculty set fname = '$fname', fphoneno = '$fphoneno', fdesignation = $fdesignation, fqualification = '$fqualification', finterest = '$finterest', fstatus = $fstatus where fid = $fid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;

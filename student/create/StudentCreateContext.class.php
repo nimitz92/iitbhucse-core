@@ -9,6 +9,7 @@ require_once(SBINTERFACES);
  *	@param stemail		string			Student email
  *	@param stcourse	integer			Student course 1=BTech 2=IDD 3=PhD
  *	@param styear		integer			Student year
+ *  @param ststatus     integer			Student Status 1=ENROLLED 2=ALUMNUS
  *	@param username	string			Username
  *	@param subject		string			Subject
  *	@param message	string			Message
@@ -41,7 +42,9 @@ class StudentCreateContext implements ContextService {
 		$stcourse = $model['stcourse'];
 		$styear = $model['styear'];		
 		$stinterest = $conn->escape($model['stinterest']);
-		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear, stinterest) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, '$stinterest');", true);
+		$ststatus = $model['ststatus'];
+		
+		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear, stinterest, ststatus) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, '$stinterest', $ststatus);", true);
 		
 		if($result === false){
 			$model['valid'] = false;
