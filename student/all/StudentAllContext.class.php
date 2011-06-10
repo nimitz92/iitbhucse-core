@@ -4,10 +4,10 @@ require_once(SBINTERFACES);
 /**
  *	StudentAllContext class
  *
- *  @param ststatus				integer			Student Status 1=ENROLLED 2=ALUMNUS 
+ *  @param ststatus			integer			Student Status 1=ENROLLED 2=ALUMNUS 
  *	@param conn 		  		resource 		Database connection
  *	
- *	@return valid 				boolean			Processed without errors
+ *	@return valid 				boolean		Processed without errors
  *	@return msg					string			Error message if any
  *
 **/

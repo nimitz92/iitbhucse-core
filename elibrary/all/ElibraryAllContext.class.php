@@ -4,10 +4,10 @@ require_once(SBINTERFACES);
 /**
  *	ElibraryAllContext class
  *
- *  @param bookcollection		string			Book Collection 
+ *  @param bookcollection	string			Book Collection 
  *	@param conn 		  		resource 		Database connection
  *	
- *	@return valid 				boolean			Processed without errors
+ *	@return valid 				boolean		Processed without errors
  *	@return msg					string			Error message if any
  *
 **/

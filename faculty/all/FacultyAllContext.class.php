@@ -7,7 +7,7 @@ require_once(SBINTERFACES);
  *  @param fstatus				integer			Faculty Status 1=Teaching 2=Retired 
  *	@param conn 		  		resource 		Database connection
  *	
- *	@return valid 				boolean			Processed without errors
+ *	@return valid 				boolean		Processed without errors
  *	@return msg					string			Error message if any
  *
 **/
