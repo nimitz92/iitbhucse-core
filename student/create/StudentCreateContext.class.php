@@ -13,9 +13,11 @@ require_once(SBINTERFACES);
  *	@param username	string			Username
  *	@param subject		string			Subject
  *	@param message	string			Message
+ *	@param mail			boolean		Send mail
  *	@param conn 		resource 		Database connection
  *	
  *	@return stuid		long int			Student ID generated
+ *	@return stresume	string			Resume Storage ID
  *	@return valid 		boolean		Processed without errors
  *	@return msg			string			Error message if any
  *
@@ -42,17 +44,19 @@ class StudentCreateContext implements ContextService {
 		$stcourse = $model['stcourse'];
 		$styear = $model['styear'];		
 		$ststatus = $model['ststatus'];
+		$stresume = $model['stgid'];
 		
-		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear,  ststatus) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, $ststatus);", true);
+		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear,  ststatus, stresume) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, $ststatus, '$stresume');", true);
 		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database';
+			$model['msg'] = 'Error in Database @setContext/student.create : '.$conn->getError();
 			return $model;
 		}
 		
 		$model['valid'] = true;
 		$model['stuid'] = $stuid;
+		$model['stresume'] = $stresume;
 		return $model;
 	}
 }
