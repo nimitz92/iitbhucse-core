@@ -14,8 +14,8 @@ require_once(SBINTERFACES);
  *  @param stcgpa      	string          	Student CGPA
  *  @param stplacement 	string          	Student Placement Status
  *  @param stinternship 	string          	Student Internship Status
- *  @param stresume     	string          	Student Resume storage id
- *  @param ststatus         integer			Student Status 1=ENROLLED 2=ALUMNUS
+ *  //@param stresume     	string          	Student Resume storage id
+ *  @param ststatus        integer		Student Status 1=ENROLLED 2=ALUMNUS
  *	@param conn 			resource 		Database connection
  *	
  *	@return valid 			boolean		Processed without errors
@@ -44,10 +44,10 @@ class StudentEditContext implements ContextService {
 		$stcgpa = $conn->escape($model['stcgpa']);
 		$stinternship = $conn->escape($model['stinternship']);
 		$stplacement = $conn->escape($model['stplacement']);
-		$stresume = $conn->escape($model['stresume']);
+		//$stresume = $conn->escape($model['stresume']);
 		$ststatus = $model['ststatus'];
 		
-		$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', stresume = '$stresume', ststatus = $ststatus where stuid = $stuid;", true);
+		$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus where stuid = $stuid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;
