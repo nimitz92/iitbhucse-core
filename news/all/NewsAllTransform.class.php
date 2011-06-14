@@ -4,10 +4,10 @@ require_once(SBKERNEL);
 require_once(SBCOMLOADER);
 
 /**
- *	FacultyAllTransform class
+ *	NewsAllTransform class
  *
 **/
-class FacultyAllTransform implements TransformService {
+class NewsAllTransform implements TransformService {
 
 	/**
 	 *	@interface TransformService
