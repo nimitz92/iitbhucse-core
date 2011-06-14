@@ -5,6 +5,7 @@ require_once(SBINTERFACES);
  *	StudentAllContext class
  *
  *  @param styear				string			Student year
+ *	@param stcourse			integer			Student course 1=B Tech 2=IDD 3=PhD
  *	@param allyear				boolean		Return all years if set
  *	@param conn 		  		resource 		Database connection
  *	
@@ -27,7 +28,8 @@ class StudentAllContext implements ContextService {
 			$result = $conn->getResult("select distinct styear from students order by styear desc;");
 		} else {
 			$styear = $conn->escape($model['styear']);
-			$result = $conn->getResult("select * from students where styear = '$styear' order by stcourse, strollno;");
+			$stcourse = $model['stcourse'];
+			$result = $conn->getResult("select * from students where styear = '$styear' and stcourse=$stcourse order by stcourse, strollno;");
 		}
 		
 		if($result === false){
