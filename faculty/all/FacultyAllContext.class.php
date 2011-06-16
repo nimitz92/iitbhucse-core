@@ -37,7 +37,7 @@ class FacultyAllContext implements ContextService {
 	 *	@interface ContextService
 	**/
 	public function setContext($model){
-		
+
 		return $model;
 	}
 }
