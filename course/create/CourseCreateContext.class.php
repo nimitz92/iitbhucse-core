@@ -31,6 +31,7 @@ class CourseCreateContext implements ContextService {
 		$crsid = $model['crsid'];
 		$crsname = $conn->escape($model['crsname']);
 		$crsdescription = $conn->escape($model['crsdescription']);
+		
 		$result = $conn->getResult("insert into courses (crsid, crsname, crsdescription) values ($crsid, '$crsname', '$crsdescription');", true);
 		
 		if($result === false){
