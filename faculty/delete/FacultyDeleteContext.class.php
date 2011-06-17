@@ -34,7 +34,7 @@ class FacultyDeleteContext implements ContextService {
 			$model['msg'] = 'Invalid Faculty ID';
 			return $model;
 		}
-		
+		$model['uid'] = $fid;
 		$model['faculty'] = $result[0];
 		return $model;
 	}
@@ -42,11 +42,11 @@ class FacultyDeleteContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
 		$fid = $model['uid'];	
 		
-		$result = $conn->getResult("delete from faculty where fid=$fid);", true);
+		$result = $conn->getResult("delete from faculty where fid=$fid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;

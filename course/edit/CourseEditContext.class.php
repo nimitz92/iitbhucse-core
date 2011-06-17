@@ -7,6 +7,7 @@ require_once(SBINTERFACES);
  *  @param crsid                    long integer   Course ID
  *	@param crsname		        string			Course name
  *	@param crsdescription	    string			Course Description
+ *  @param crspart					integer		Course Part
  *	@param conn 		            resource 		Database connection
  *	
  *	@return valid 		            boolean		Processed without errors
@@ -30,8 +31,8 @@ class CourseEditContext implements ContextService {
 		$crsid = $model['crsid'];
 		$crsname = $conn->escape($model['crsname']);
 		$crsdescription = $conn->escape($model['crsdescription']);		
-		
-		$result = $conn->getResult("update courses set crsname = '$crsname', crsdescription = '$crsdescription' where crsid = $crsid;", true);
+		$crspart = $model['crspart'];
+		$result = $conn->getResult("update courses set crsname = '$crsname', crsdescription = '$crsdescription', crspart = $crspart where crsid = $crsid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;

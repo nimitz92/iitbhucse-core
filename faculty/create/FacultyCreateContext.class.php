@@ -33,7 +33,7 @@ class FacultyCreateContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
 		$fid = $model['uid'];
 		$conn = $model['conn'];
@@ -43,8 +43,8 @@ class FacultyCreateContext implements ContextService {
 		$fphone = $conn->escape($model['fphone']);
 		$fqualification = $conn->escape($model['fqualification']);		
 		$femail = $conn->escape($model['femail']);
-		$finterset = $conn->escape($model['finterset']);
-		$fstatus = $model['fatatus'];
+		$finterest = $conn->escape($model['finterest']);
+		$fstatus = $model['fstatus'];
 		
 		$result = $conn->getResult("insert into faculty (fid, fname, fdesignation, fqualification, femail, fphone, finterest, fstatus) values ($fid, '$fname', $fdesignation, '$fqualification', '$femail', '$fphone', '$finterest', $fstatus);", true);
 		

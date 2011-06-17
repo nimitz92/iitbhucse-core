@@ -21,7 +21,7 @@ class FacultyAllContext implements ContextService {
 		$conn = $model['conn'];
 		$fstatus = $model['fstatus'];
 		
-		$result = $conn->getResult("select * from faculty where fstatus = $fstatus;", true);
+		$result = $conn->getResult("select * from faculty where fstatus = $fstatus;");
 		
 		if($result === false){
 			$model['valid'] = false;
