@@ -27,7 +27,7 @@ class CourseAllContext implements ContextService {
 			$model['msg'] = 'Error in Database @setContext/course.all';
 			return $model;
 		}
-		$model['course'] = $result;
+		$model['courses'] = $result;
 		$model['valid'] = true;
 		return $model;
 	}

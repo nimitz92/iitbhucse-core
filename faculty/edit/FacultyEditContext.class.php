@@ -30,9 +30,9 @@ class FacultyEditContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
-		$fid = $model['uid'];
+		$fid = $model['fid'];
 		$fname = $conn->escape($model['fname']);
 		$fdesignation = $model['fdesignation'];
 		$fphone = $conn->escape($model['fphone']);
@@ -40,7 +40,7 @@ class FacultyEditContext implements ContextService {
 		$finterest = $conn->escape($model['finterest']);
 		$fstatus = $model['fstatus'];
 		
-		$result = $conn->getResult("update faculty set fname = '$fname', fphoneno = '$fphoneno', fdesignation = $fdesignation, fqualification = '$fqualification', finterest = '$finterest', fstatus = $fstatus where fid = $fid;", true);
+		$result = $conn->getResult("update faculty set fname = '$fname', fphone = '$fphone', fdesignation = $fdesignation, fqualification = '$fqualification', finterest = '$finterest', fstatus = $fstatus where fid = $fid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;
