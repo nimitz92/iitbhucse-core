@@ -26,13 +26,13 @@ class CourseEditContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
-		$crsid = $model['crsid'];
+		$crsid = $conn->escape($model['crsid']);
 		$crsname = $conn->escape($model['crsname']);
 		$crsdescription = $conn->escape($model['crsdescription']);		
 		$crspart = $model['crspart'];
-		$result = $conn->getResult("update courses set crsname = '$crsname', crsdescription = '$crsdescription', crspart = $crspart where crsid = $crsid;", true);
+		$result = $conn->getResult("update courses set crsname = '$crsname', crsdescription = '$crsdescription', crspart = $crspart where crsid = '$crsid';", true);
 		
 		if($result === false){
 			$model['valid'] = false;

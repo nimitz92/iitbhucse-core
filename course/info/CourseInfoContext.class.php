@@ -19,9 +19,9 @@ class CourseInfoContext implements ContextService {
 	**/
 	public function getContext($model){
 		$conn = $model['conn'];
-		$crsid = $model['crsid'];
+		$crsid = $conn->escape($model['crsid']);
 		
-		$query = "select * from courses where crsid=$crsid";
+		$query = "select * from courses where crsid='$crsid' order by crspart";
 		$result = $conn->getResult($query);
 		
 		if($result === false){
@@ -44,7 +44,7 @@ class CourseInfoContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		return $model;
 	}
 }

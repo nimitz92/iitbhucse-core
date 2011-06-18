@@ -18,8 +18,13 @@ class StudentEditTransform implements TransformService {
 		$kernel = new ServiceKernel();
 		$cl = new ComponentLoader();
 		
-		$op = $cl->load("user.authenticate", ECROOT);
-		$model = $kernel->run($op, $model);
+		if(!$model['admin']){
+			$op = $cl->load("user.authenticate", ECROOT);
+			$model = $kernel->run($op, $model);
+			
+			if(!$model['valid'])
+				return $model;
+		}
 		
 		return $model;
 	}

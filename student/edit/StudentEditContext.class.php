@@ -34,20 +34,22 @@ class StudentEditContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
-		$stuid = $model['uid'];
+		$stuid = $model['stuid'];
 		$stname = $conn->escape($model['stname']);
 		$strollno = $conn->escape($model['strollno']);
 		$stcourse = $model['stcourse'];
-		$styear = $model['styear'];		
+		$styear = $model['styear'];	
 		$stcgpa = $conn->escape($model['stcgpa']);
 		$stinternship = $conn->escape($model['stinternship']);
 		$stplacement = $conn->escape($model['stplacement']);
+		$stinterest = $model['stinterest'];
 		//$stresume = $conn->escape($model['stresume']);
+		
 		$ststatus = $model['ststatus'];
 		
-		$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus where stuid = $stuid;", true);
+		$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus, stinterest = '$stinterest' where stuid = $stuid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;

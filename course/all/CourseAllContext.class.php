@@ -20,7 +20,7 @@ class CourseAllContext implements ContextService {
 	
 		$conn = $model['conn'];
 		
-		$result = $conn->getResult("select * from courses", true);
+		$result = $conn->getResult("select * from courses order by crspart");
 		
 		if($result === false){
 			$model['valid'] = false;
@@ -35,7 +35,7 @@ class CourseAllContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		
 		return $model;
 	}
