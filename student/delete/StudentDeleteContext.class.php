@@ -35,18 +35,18 @@ class StudentDeleteContext implements ContextService {
 			return $model;
 		}
 		
-		$model['uid'] = $result[0];
+		$model['uid'] = $stuid;
 		return $model;
 	}
 	
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
-		$stuid = $model['uid'];	
+		$stuid = $model['stuid'];	
 		
-		$result = $conn->getResult("delete from students where stuid=$stuid);", true);
+		$result = $conn->getResult("delete from students where stuid=$stuid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;

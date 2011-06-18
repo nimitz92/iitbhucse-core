@@ -23,13 +23,17 @@ class StudentAllContext implements ContextService {
 	
 		$conn = $model['conn'];
 		$allyear = isset($model['allyear']);
+		$admin = isset($model['admin']);
 		
 		if($allyear){
 			$result = $conn->getResult("select distinct styear from students order by styear desc;");
-		} else {
-			$styear = $conn->escape($model['styear']);
+		} else if($admin){
+		$stcourse = $model['stcourse'];
+		$result = $conn->getResult("select * from students where stcourse=$stcourse order by stcourse, strollno;");
+		} else{
+			$styear = $model['styear'];
 			$stcourse = $model['stcourse'];
-			$result = $conn->getResult("select * from students where styear = '$styear' and stcourse=$stcourse order by stcourse, strollno;");
+			$result = $conn->getResult("select * from students where styear = $styear and stcourse=$stcourse order by stcourse, strollno;");
 		}
 		
 		if($result === false){
@@ -37,6 +41,7 @@ class StudentAllContext implements ContextService {
 			$model['msg'] = 'Error in Database @getContext/student.all : '.$conn->getError();
 			return $model;
 		}
+		
 		$model['students'] = $result;
 		$model['valid'] = true;
 		return $model;

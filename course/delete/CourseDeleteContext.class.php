@@ -23,11 +23,11 @@ class CourseDeleteContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
-		$crsid = $model['crsid'];	
+		$crsid = $conn->escape($model['crsid']);	
 		
-		$result = $conn->getResult("delete from courses where crsid=$crsid);", true);
+		$result = $conn->getResult("delete from courses where crsid = '$crsid';", true);
 		
 		if($result === false){
 			$model['valid'] = false;
