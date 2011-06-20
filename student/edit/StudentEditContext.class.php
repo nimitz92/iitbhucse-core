@@ -4,7 +4,8 @@ require_once(SBINTERFACES);
 /**
  *	StudentEditContext class
  *
-*	@param username		string			Username
+ *	@param admin			boolean		Is admin 	
+ *	@param username		string			Username
  *	@param password		string			Password
  *	@param stname			string			Student name
  *	@param strollno		string			Student roll no
@@ -14,8 +15,8 @@ require_once(SBINTERFACES);
  *  @param stcgpa      	string          	Student CGPA
  *  @param stplacement 	string          	Student Placement Status
  *  @param stinternship 	string          	Student Internship Status
- *  //@param stresume     	string          	Student Resume storage id
- *  @param ststatus        integer		Student Status 1=ENROLLED 2=ALUMNUS
+ *  //@param stresume   string          	Student Resume storage id
+ *  @param ststatus        integer			Student Status 1=ENROLLED 2=ALUMNUS
  *	@param conn 			resource 		Database connection
  *	
  *	@return valid 			boolean		Processed without errors
