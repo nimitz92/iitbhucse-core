@@ -6,7 +6,6 @@ require_once(SBCOMLOADER);
 /**
  *	StudentEditTransform class
  *
- *	@service enhancse-core.user.authenticate
  *
 **/
 class StudentEditTransform implements TransformService {
@@ -15,7 +14,7 @@ class StudentEditTransform implements TransformService {
 	 *	@interface TransformService
 	**/
 	public function transform($model){
-		$kernel = new ServiceKernel();
+		/*$kernel = new ServiceKernel();
 		$cl = new ComponentLoader();
 		
 		if(!$model['admin']){
@@ -25,7 +24,7 @@ class StudentEditTransform implements TransformService {
 			if(!$model['valid'])
 				return $model;
 		}
-		
+		*/
 		return $model;
 	}
 }

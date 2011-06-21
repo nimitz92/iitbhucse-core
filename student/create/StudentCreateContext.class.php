@@ -4,22 +4,27 @@ require_once(SBINTERFACES);
 /**
  *	StudentCreateContext class
  *
- *	@param stname		string			Student name
- *	@param strollno	string			Student roll no
- *	@param stemail		string			Student email
- *	@param stcourse	integer			Student course 1=BTech 2=IDD 3=PhD
- *	@param styear		integer			Student year
- *  @param ststatus     integer		Student Status 1=ENROLLED 2=ALUMNUS
- *	@param username	string			Username
- *	@param subject		string			Subject
- *	@param message	string			Message
- *	@param mail			boolean		Send mail
- *	@param conn 		resource 		Database connection
+ *	@param stname				string			Student name
+ *	@param strollno			string			Student roll no
+ *	@param stemail				string			Student email
+ *	@param stcourse			integer			Student course 1=BTech 2=IDD 3=PhD
+ *	@param styear				integer			Student year
+ *  @param ststatus     		integer			Student Status 1=ENROLLED 2=ALUMNUS
+ *
+ *	@param username			string			Username
+ *	@param subject				string			Subject
+ *	@param message			string			Message
+ *	@param mail					boolean		Send mail
+ *
+ *	@param strspath			string			Resume save path
+ *	@param stphpath			string			Photo save path
+ *	@param conn 				resource 		Database connection
  *	
- *	@return stuid		long int			Student ID generated
- *	@return stresume	string			Resume Storage ID
- *	@return valid 		boolean		Processed without errors
- *	@return msg			string			Error message if any
+ *	@return stuid				long int			Student ID generated
+ *	@return stresume			long int			Resume Space ID
+ *	@return stphoto			long int			Photo Space ID
+ *	@return valid 				boolean		Processed without errors
+ *	@return msg					string			Error message if any
  *
 **/
 class StudentCreateContext implements ContextService {
@@ -44,9 +49,10 @@ class StudentCreateContext implements ContextService {
 		$stcourse = $model['stcourse'];
 		$styear = $model['styear'];		
 		$ststatus = $model['ststatus'];
-		$stresume = $model['stgid'];
+		$stresume = $model['stresume'];
+		$stphoto = $model['stphoto'];
 		
-		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear,  ststatus, stresume) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, $ststatus, '$stresume');", true);
+		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear,  ststatus, stresume, stphoto) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, $ststatus, $stresume, $stphoto);", true);
 		
 		if($result === false){
 			$model['valid'] = false;

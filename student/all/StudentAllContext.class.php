@@ -29,11 +29,11 @@ class StudentAllContext implements ContextService {
 			$result = $conn->getResult("select distinct styear from students order by styear desc;");
 		} else if($admin){
 		$stcourse = $model['stcourse'];
-		$result = $conn->getResult("select * from students where stcourse=$stcourse order by stcourse, strollno;");
+		$result = $conn->getResult("select *, (select size from storages where stgid = (select stgid from spaces where spid=stresume)) as strssize from students where stcourse=$stcourse order by stcourse, strollno;");
 		} else{
 			$styear = $model['styear'];
 			$stcourse = $model['stcourse'];
-			$result = $conn->getResult("select * from students where styear = $styear and stcourse=$stcourse order by stcourse, strollno;");
+			$result = $conn->getResult("select *, (select size from storages where stgid = (select stgid from spaces where spid=stresume)) as strssize from students where styear = $styear and stcourse=$stcourse order by stcourse, strollno;");
 		}
 		
 		if($result === false){

@@ -15,7 +15,6 @@ require_once(SBINTERFACES);
  *  @param stcgpa      	string          	Student CGPA
  *  @param stplacement 	string          	Student Placement Status
  *  @param stinternship 	string          	Student Internship Status
- *  //@param stresume   string          	Student Resume storage id
  *  @param ststatus        integer			Student Status 1=ENROLLED 2=ALUMNUS
  *	@param conn 			resource 		Database connection
  *	
@@ -38,19 +37,29 @@ class StudentEditContext implements ContextService {
 	public function setContext($model){
 		$conn = $model['conn'];
 		$stuid = $model['stuid'];
-		$stname = $conn->escape($model['stname']);
-		$strollno = $conn->escape($model['strollno']);
-		$stcourse = $model['stcourse'];
-		$styear = $model['styear'];	
+		$admin = isset($model['admin']) ? $model['admin'] : false;
+		
 		$stcgpa = $conn->escape($model['stcgpa']);
-		$stinternship = $conn->escape($model['stinternship']);
-		$stplacement = $conn->escape($model['stplacement']);
 		$stinterest = $model['stinterest'];
-		//$stresume = $conn->escape($model['stresume']);
 		
-		$ststatus = $model['ststatus'];
+		if($admin){
+			$stname = $conn->escape($model['stname']);
+			$strollno = $conn->escape($model['strollno']);
+			$stcourse = $model['stcourse'];
+			$styear = $model['styear'];	
+			$ststatus = $model['ststatus'];
+			$stinternship = $conn->escape($model['stinternship']);
+			$stplacement = $conn->escape($model['stplacement']);
+			
+			$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus, stinterest = '$stinterest' where stuid = $stuid;", true);
+		}
+		else{
+			$result = $conn->getResult("update students set stcgpa = '$stcgpa',  stinterest = '$stinterest' where stuid = $stuid;", true);
+		}
 		
-		$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus, stinterest = '$stinterest' where stuid = $stuid;", true);
+		
+		
+		
 		
 		if($result === false){
 			$model['valid'] = false;
