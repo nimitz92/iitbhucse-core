@@ -8,6 +8,8 @@ require_once(SBCOMLOADER);
  *
  *	@service enhancse-core.user.register
  *	@service enhancse-core.storage.create
+ *	@service enhancse-core.space.add
+ *	@service enhancse-core.content.create
  *
 **/
 class StudentCreateTransform implements TransformService {
