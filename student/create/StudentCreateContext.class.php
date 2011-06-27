@@ -51,8 +51,9 @@ class StudentCreateContext implements ContextService {
 		$ststatus = $model['ststatus'];
 		$stresume = $model['stresume'];
 		$stphoto = $model['stphoto'];
+		$sthome = $model['sthome'];
 		
-		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear,  ststatus, stresume, stphoto) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, $ststatus, $stresume, $stphoto);", true);
+		$result = $conn->getResult("insert into students (stuid, stname, strollno, stemail, stcourse, styear,  ststatus, stresume, stphoto, sthome) values ($stuid, '$stname', '$strollno', '$stemail', $stcourse, $styear, $ststatus, $stresume, $stphoto, $sthome);", true);
 		
 		if($result === false){
 			$model['valid'] = false;

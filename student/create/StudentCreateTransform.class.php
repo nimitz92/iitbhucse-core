@@ -8,6 +8,8 @@ require_once(SBCOMLOADER);
  *
  *	@service enhancse-core.user.register
  *	@service enhancse-core.storage.create
+ *	@service enhancse-core.space.add
+ *	@service enhancse-core.content.create
  *
 **/
 class StudentCreateTransform implements TransformService {
@@ -28,7 +30,8 @@ class StudentCreateTransform implements TransformService {
 		$op = $cl->load("storage.create", ECROOT);
 		$model['stgname'] = 'Resume-'.$model['stname'];
 		$model['filepath'] = $model['strspath'];
-		$model['filename'] = $model['stname'].'.pdf';
+		// Uniqueness kept be using username ... email can also be used
+		$model['filename'] = 'Resume-'.$model['username'].'.pdf';
 		$model['mime'] = 'application/pdf';
 		$model['size'] = 0;
 		$model['owner'] = $model['uid'];
@@ -41,7 +44,7 @@ class StudentCreateTransform implements TransformService {
 		
 		$op = $cl->load("space.add", ECROOT);
 		$model['spvfpath'] = '/resume/';
-		$model['spvfname'] = $model['filename'];
+		$model['spvfname'] = $model['stname'].'.pdf';
 		$model = $kernel->run($op, $model);
 		
 		if(!$model['valid'])
@@ -52,7 +55,7 @@ class StudentCreateTransform implements TransformService {
 		$op = $cl->load("storage.create", ECROOT);
 		$model['stgname'] = 'Photo-'.$model['stname'];
 		$model['filepath'] = $model['stphpath'];
-		$model['filename'] = $model['stname'].'.png';
+		$model['filename'] = 'Photo-'.$model['username'].'.png';
 		$model['mime'] = 'image/png';
 		$model['size'] = 0;
 		$model['owner'] = $model['uid'];
@@ -65,13 +68,29 @@ class StudentCreateTransform implements TransformService {
 		
 		$op = $cl->load("space.add", ECROOT);
 		$model['spvfpath'] = '/photo/';
-		$model['spvfname'] = $model['filename'];
+		$model['spvfname'] = $model['stname'].'.png';
+		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
+			
+		$model['stphoto'] = $model['spid'];
+		
+		$op = $cl->load("content.create", ECROOT);
+		$model['cntname'] = 'Content-'.$model['username'];
+		$model['cntowner'] = $model['uid'];
+		$model['cntstype'] = 1;
+		$model['cntstyle'] = '';
+		$model['cntttype'] = 1;
+		$model['cnttpl'] = '<h2>${content.message}</h2>';
+		$model['cntdtype'] = 1;
+		$model['cntdata'] = json_encode(array('message' => 'Welcome to '.$model['stname'].'\'s Home Page'));
 		$model = $kernel->run($op, $model);
 		
 		if(!$model['valid'])
 			return $model;
 		
-		$model['stphoto'] = $model['spid'];
+		$model['sthome'] = $model['cntid'];
 		return $model;
 	}
 }
