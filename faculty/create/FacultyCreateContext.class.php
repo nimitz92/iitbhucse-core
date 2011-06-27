@@ -10,9 +10,13 @@ require_once(SBINTERFACES);
  *	@param fdesignation			integer			Faculty designation 1=Professor 2=Assistant professor 3=Reader 4=Lecturer
  *  @param fstatus				integer			Faculty Status 1=Teaching 2=Retired
  *	@param fqualification		string			Faculty qualification
+ *
  *	@param username	   			string			Username
  *	@param subject					string			Subject
  *	@param message	    		string			Message
+ *
+ *	@param frspath			string			Resume save path
+ *	@param fphpath			string			Photo save path
  *	@param conn 					resource 		Database connection
  *	
  *	@return fid						long int			Faculty ID generated
@@ -45,8 +49,11 @@ class FacultyCreateContext implements ContextService {
 		$femail = $conn->escape($model['femail']);
 		$finterest = $conn->escape($model['finterest']);
 		$fstatus = $model['fstatus'];
+		$fresume = $model['fresume'];
+		$fphoto = $model['fphoto'];
+		$fhome = $model['fhome'];
 		
-		$result = $conn->getResult("insert into faculty (fid, fname, fdesignation, fqualification, femail, fphone, finterest, fstatus) values ($fid, '$fname', $fdesignation, '$fqualification', '$femail', '$fphone', '$finterest', $fstatus);", true);
+		$result = $conn->getResult("insert into faculty (fid, fname, fdesignation, fqualification, femail, fphone, finterest, fstatus, fresume, fphoto, fhome) values ($fid, '$fname', $fdesignation, '$fqualification', '$femail', '$fphone', '$finterest', $fstatus, $fresume, $fphoto, $fhome);", true);
 		
 		if($result === false){
 			$model['valid'] = false;
