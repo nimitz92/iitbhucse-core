@@ -11,6 +11,7 @@ require_once(SBINTERFACES);
  *	@param strollno		string			Student roll no
  *	@param stcourse		integer			Student course 1=BTech 2=IDD 3=PhD
  *	@param styear			integer			Student year
+ *	@param stphone		string			Student phone
  *  @param stinterest   	string          	Student Interest
  *  @param stcgpa      	string          	Student CGPA
  *  @param stplacement 	string          	Student Placement Status
@@ -39,6 +40,7 @@ class StudentEditContext implements ContextService {
 		$stuid = $model['stuid'];
 		$admin = isset($model['admin']) ? $model['admin'] : false;
 		
+		$stphone = $conn->escape($model['stphone']);
 		$stcgpa = $conn->escape($model['stcgpa']);
 		$stinterest = $model['stinterest'];
 		
@@ -51,19 +53,15 @@ class StudentEditContext implements ContextService {
 			$stinternship = $conn->escape($model['stinternship']);
 			$stplacement = $conn->escape($model['stplacement']);
 			
-			$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus, stinterest = '$stinterest' where stuid = $stuid;", true);
+			$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stphone='$stphone', stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus, stinterest = '$stinterest' where stuid = $stuid;", true);
 		}
 		else{
-			$result = $conn->getResult("update students set stcgpa = '$stcgpa',  stinterest = '$stinterest' where stuid = $stuid;", true);
+			$result = $conn->getResult("update students set stphone='$stphone', stcgpa = '$stcgpa',  stinterest = '$stinterest' where stuid = $stuid;", true);
 		}
-		
-		
-		
-		
 		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database @setContext/student.edit';
+			$model['msg'] = 'Error in Database @setContext/student.edit : '.$conn->getError();
 			return $model;
 		}
 		
