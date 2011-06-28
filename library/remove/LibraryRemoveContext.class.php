@@ -4,7 +4,7 @@ require_once(SBINTERFACES);
 /**
  *	LibraryRemoveContext class
  *
- *	@param bookid		string			Book storage ID
+ *	@param isbn					string			Book ISBN
  *	@param conn 		resource 		Database connection
  *	
  *	@return valid 		boolean		Processed without errors
@@ -18,9 +18,9 @@ class LibraryRemoveContext implements ContextService {
 	**/
 	public function getContext($model){
 		$conn = $model['conn'];
-		$bookid = $model['bookid'];
+		$isbn = $conn->escape($model['isbn']);
 		
-		$result = $conn->getResult("select bookid from elibrary where bookid = $bookid;", true);
+		$result = $conn->getResult("select bookid from library where isbn = '$isbn';", true);
 		
 		if($result === false){
 			$model['valid'] = false;
@@ -30,7 +30,7 @@ class LibraryRemoveContext implements ContextService {
 		
 		if(count($result) != 1){
 			$model['valid'] = false;
-			$model['msg'] = 'Invalid Book ID';
+			$model['msg'] = 'Invalid ISBN';
 			return $model;
 		}
 		
@@ -43,9 +43,9 @@ class LibraryRemoveContext implements ContextService {
 	**/
 	public function setContext($model){
 		$conn = $model['conn'];
-		$bookid = $model['bookid'];
+		$isbn = $conn->escape($model['isbn']);
 		
-		$result = $conn->getResult("delete from library where bookid = $bookid;", true);
+		$result = $conn->getResult("delete from library where isbn = '$isbn';", true);
 		
 		if($result === false){
 			$model['valid'] = false;

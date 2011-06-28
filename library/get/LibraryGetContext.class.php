@@ -4,7 +4,7 @@ require_once(SBINTERFACES);
 /**
  *	LibraryGetContext class
  *
- *	@param bookid		string			Book storage ID
+ *	@param isbn					string			Book ISBN
  *	@param conn 		resource 		Database connection
  *	
  *	@return book		array			Book Info
@@ -19,9 +19,9 @@ class LibraryGetContext implements ContextService {
 	**/
 	public function getContext($model){
 		$conn = $model['conn'];
-		$bookname = $model['bookname'];
+		$isbn = $conn->escape($model['isbn']);
 		
-		$result = $conn->getResult("select * from library where bookname = '$bookname';");
+		$result = $conn->getResult("select * from library where isbn = '$isbn';");
 		
 		if($result === false){
 			$model['valid'] = false;
@@ -44,20 +44,7 @@ class LibraryGetContext implements ContextService {
 	 *	@interface ContextService
 	**/
 	public function setContext($model){
-		$conn = $model['conn'];
-		$bookname = $model['book']['bookname'];
 		
-		$result1 = $conn->getResult("select count(*) from library where bookname = '$bookname';");
-		$result2 = $conn->getResult("select count(*) from library where bookname = '$bookname' and status = 1;");
-		
-		if($result1 === false || $result2 === false){
-			$model['valid'] = false;
-			$model['msg'] = 'Error in Database @setContext/library.get';
-			return $model;
-		}
-		
-		$model['total'] = $result1[0][0];
-		$model['avail'] = $result2[0][0];
 		return $model;
 	}
 }

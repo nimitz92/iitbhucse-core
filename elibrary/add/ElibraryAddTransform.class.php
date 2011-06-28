@@ -19,6 +19,22 @@ class ElibraryAddTransform implements TransformService {
 		$cl = new ComponentLoader();
 		
 		$op = $cl->load("storage.create", ECROOT);
+		$model['stgname'] = 'E.Book-'.$model['bookname'];
+		$model['filepath'] = $model['bookpath'];
+		$model['filename'] = 'E.book-'.$model['bookname'].'.pdf';
+		$model['mime'] = 'application/pdf';
+		$model['size'] = 0;
+		$model['owner'] = $model['uid'];
+		$model['access'] = 2;
+		$model['protection'] = '';
+		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
+		
+		$op = $cl->load("space.add", ECROOT);
+		$model['spvfpath'] = '/ebook/';
+		$model['spvfname'] = $model['bookname'].'.pdf';
 		$model = $kernel->run($op, $model);
 		
 		return $model;

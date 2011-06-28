@@ -4,6 +4,7 @@ require_once(SBINTERFACES);
 /**
  *	LibraryAddContext class
  *
+ *	@param isbn						string			Book ISBN
  *	@param bookname					string			Book name
  *	@param bookauthor				string			Book Author
  *	@param bookpages				integer			Pages in Book
@@ -24,6 +25,8 @@ class LibraryAddContext implements ContextService {
 	**/
 	public function getContext($model){
 		$conn = $model['conn'];
+		$isbn = $conn->escape($model['isbn']);
+		$bookid = $model['bookid'];
 		$bookname = $conn->escape($model['bookname']);
 		$bookauthor = $conn->escape($model['bookauthor']);
 		$bookdescription = $conn->escape($model['bookdescription']);
@@ -31,16 +34,15 @@ class LibraryAddContext implements ContextService {
 		$bookpages = isset($model['bookpages']) ? $model['bookpages'] : null;
 		$status = 1;
 		
-		$result = $conn->getResult("insert into library (bookname, bookauthor, bookdescription, bookpages, bookcollection, status) values ('$bookname', '$bookauthor', '$bookdescription', $bookpages, '$bookcollection', $status);", true);
+		$result = $conn->getResult("insert into library (isbn, bookid, bookname, bookauthor, bookdescription, bookpages, bookcollection, status) values ('$isbn', $bookid, '$bookname', '$bookauthor', '$bookdescription', $bookpages, '$bookcollection', $status);", true);
 		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database @ setContext/library.add';
+			$model['msg'] = 'Error in Database @ getContext/library.add';
 			return $model;
 		}
 		
 		$model['valid'] = true;
-		$model['bookid'] = $conn->getAutoID();
 		return $model;
 	}
 	

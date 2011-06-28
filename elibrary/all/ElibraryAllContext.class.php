@@ -19,16 +19,23 @@ class ElibraryAllContext implements ContextService {
 	public function getContext($model){
 	
 		$conn = $model['conn'];
-		$bookcollection = $conn->escape($model['bookcollection']);
+		$admin = $model['admin'];
 		
-		$result = $conn->getResult("select * from elibrary where bookcollection = '$bookcollection';", true);
+		
+		if($admin){
+			$result = $conn->getResult("select * from elibrary order by bookname;");
+		}
+		else{
+			$bookcollection = $conn->escape($model['bookcollection']);
+			$result = $conn->getResult("select * from elibrary where bookcollection = '$bookcollection';", true);
+		}
 		
 		if($result === false){
 			$model['valid'] = false;
 			$model['msg'] = 'Error in Database @setContext/elibrary.all';
 			return $model;
 		}
-		$model['status'] = $result;
+		$model['ebooks'] = $result;
 		$model['valid'] = true;
 		return $model;
 	}
@@ -36,7 +43,7 @@ class ElibraryAllContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		
 		return $model;
 	}

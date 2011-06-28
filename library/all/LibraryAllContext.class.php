@@ -20,17 +20,23 @@ class LibraryAllContext implements ContextService {
 	
 		$conn = $model['conn'];
 		$admin = isset($model['admin']);
-		if($admin){
-			$result = $conn->getResult("select distinct(bookname) from library order by bookname");
+		$allbooks = isset($model['allbooks']);
+		$getcollections = isset($model['getcollections']);
+		
+		if($allbooks || $admin){
+			$result = $conn->getResult("select * from library order by bookname;");
+		}
+		else if($getcollections){
+			$result = $conn->getResult("select distinct bookcollection from library order by bookcollection;");
 		}
 		else{
 			$bookcollection = $conn->escape($model['bookcollection']);
-			$result = $conn->getResult("select * from library where bookcollection = $bookcollection order by bookname");
+			$result = $conn->getResult("select * from library where bookcollection = '$bookcollection' order by bookname;");
 		}
 		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database @setContext/library.all';
+			$model['msg'] = 'Error in Database @getContext/library.all';
 			return $model;
 		}
 		$model['books'] = $result;

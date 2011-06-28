@@ -27,20 +27,20 @@ class ElibraryAddContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
-		$bookid = $model['stgid'];
+		$bookid = $model['spid'];
 		$bookname = $conn->escape($model['bookname']);
 		$bookauthor = $conn->escape($model['bookauthor']);
-		$bookdesciption = $conn->escape($model['bookdescription']);
+		$bookdescription = $conn->escape($model['bookdescription']);
 		$bookcollection = $conn->escape($model['bookcollection']);
 		$bookpages = $model['bookpages'];
 		
-		$result = $conn->getResult("insert into elibrary (bookid, bookname, bookauthor, bookdescription, bookpages, bookcollection) values ('$bookid', '$bookname', '$bookauthor', '$bookdescription', $bookpages, '$bookcollection');", true);
+		$result = $conn->getResult("insert into elibrary (bookid, bookname, bookauthor, bookdescription, bookpages, bookcollection) values ($bookid, '$bookname', '$bookauthor', '$bookdescription', $bookpages, '$bookcollection');", true);
 		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database';
+			$model['msg'] = 'Error in Database @setcontext/elibrary.add';
 			return $model;
 		}
 		

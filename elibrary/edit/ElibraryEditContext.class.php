@@ -22,14 +22,14 @@ class ElibraryEditContext implements ContextService {
 	**/
 	public function getContext($model){
 		$conn = $model['conn'];
-		$bookid = $conn->escape($model['bookid']);
+		$bookid = $model['bookid'];
 		$bookname = $conn->escape($model['bookname']);
 		$bookauthor = $conn->escape($model['bookauthor']);
 		$bookdesciption = $conn->escape($model['bookdescription']);
 		$bookcollection = $conn->escape($model['bookcollection']);
 		$bookpages = $model['bookpages'];
 		
-		$result = $conn->getResult("update elibrary set bookname = '$bookname', bookauthor = '$bookauthor', bookdescription = '$bookdescription', bookpages = $bookpages, bookcollection = '$bookcollection';", true);
+		$result = $conn->getResult("update elibrary set bookname = '$bookname', bookauthor = '$bookauthor', bookdescription = '$bookdescription', bookpages = $bookpages, bookcollection = '$bookcollection' where bookid = $bookid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;
@@ -44,7 +44,7 @@ class ElibraryEditContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		return $model;
 	}
 }

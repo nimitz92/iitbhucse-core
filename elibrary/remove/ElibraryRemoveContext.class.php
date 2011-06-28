@@ -18,9 +18,9 @@ class ElibraryRemoveContext implements ContextService {
 	**/
 	public function getContext($model){
 		$conn = $model['conn'];
-		$bookid = $conn->escape($model['bookid']);
+		$bookid = $model['bookid'];
 		
-		$result = $conn->getResult("select bookid from elibrary where bookid = '$bookid';", true);
+		$result = $conn->getResult("select bookid from elibrary where bookid = $bookid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;
@@ -42,11 +42,11 @@ class ElibraryRemoveContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
-		$bookid = $conn->escape($model['bookid']);
+		$bookid = $model['bookid'];
 		
-		$result = $conn->getResult("delete from elibrary where bookid = '$bookid';", true);
+		$result = $conn->getResult("delete from elibrary where bookid = $bookid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;
