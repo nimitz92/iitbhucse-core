@@ -40,6 +40,7 @@ class StudentEditContext implements ContextService {
 		$admin = isset($model['admin']) ? $model['admin'] : false;
 		
 		$stcgpa = $conn->escape($model['stcgpa']);
+		$stphone = $conn->escape($model['stphone']);
 		$stinterest = $model['stinterest'];
 		
 		if($admin){
@@ -51,10 +52,10 @@ class StudentEditContext implements ContextService {
 			$stinternship = $conn->escape($model['stinternship']);
 			$stplacement = $conn->escape($model['stplacement']);
 			
-			$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus, stinterest = '$stinterest' where stuid = $stuid;", true);
+			$result = $conn->getResult("update students set stname = '$stname', strollno = '$strollno', stcourse = $stcourse, styear = $styear, stcgpa = '$stcgpa', stphone = '$stphone', stinternship = '$stinternship', stplacement = '$stplacement', ststatus = $ststatus, stinterest = '$stinterest' where stuid = $stuid;", true);
 		}
 		else{
-			$result = $conn->getResult("update students set stcgpa = '$stcgpa',  stinterest = '$stinterest' where stuid = $stuid;", true);
+			$result = $conn->getResult("update students set stcgpa = '$stcgpa', stphone = '$stphone', stinterest = '$stinterest' where stuid = $stuid;", true);
 		}
 		
 		

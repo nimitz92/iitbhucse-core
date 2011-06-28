@@ -25,7 +25,7 @@ class ElibraryEditContext implements ContextService {
 		$bookid = $model['bookid'];
 		$bookname = $conn->escape($model['bookname']);
 		$bookauthor = $conn->escape($model['bookauthor']);
-		$bookdesciption = $conn->escape($model['bookdescription']);
+		$bookdescription = $conn->escape($model['bookdescription']);
 		$bookcollection = $conn->escape($model['bookcollection']);
 		$bookpages = $model['bookpages'];
 		

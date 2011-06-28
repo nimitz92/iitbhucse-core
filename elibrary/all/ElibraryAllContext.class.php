@@ -19,15 +19,20 @@ class ElibraryAllContext implements ContextService {
 	public function getContext($model){
 	
 		$conn = $model['conn'];
-		$admin = $model['admin'];
+		$admin = isset($model['admin']);
+		$allbooks = isset($model['allbooks']);
+		$getcollections = isset($model['getcollections']);
 		
 		
-		if($admin){
-			$result = $conn->getResult("select * from elibrary order by bookname;");
+		if($allbooks || $admin){
+			$result = $conn->getResult("select *, (select size from storages where stgid = (select stgid from spaces where spid=bookid)) as booksize from elibrary order by bookname;");
+		}
+		else if($getcollections){
+			$result = $conn->getResult("select distinct bookcollection from elibrary order by bookcollection;");
 		}
 		else{
 			$bookcollection = $conn->escape($model['bookcollection']);
-			$result = $conn->getResult("select * from elibrary where bookcollection = '$bookcollection';", true);
+			$result = $conn->getResult("select *, (select size from storages where stgid = (select stgid from spaces where spid=bookid)) as booksize from elibrary where bookcollection = '$bookcollection';");
 		}
 		
 		if($result === false){
