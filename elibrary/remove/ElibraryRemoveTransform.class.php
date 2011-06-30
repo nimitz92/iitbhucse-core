@@ -18,7 +18,7 @@ class ElibraryRemoveTransform implements TransformService {
 		$kernel = new ServiceKernel();
 		$cl = new ComponentLoader();
 		
-		$op = $cl->load("storage.delete", ECROOT);
+		$op = $cl->load("space.remove", ECROOT);
 		$model = $kernel->run($op, $model);
 		
 		return $model;

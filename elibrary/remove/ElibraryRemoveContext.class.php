@@ -20,7 +20,7 @@ class ElibraryRemoveContext implements ContextService {
 		$conn = $model['conn'];
 		$bookid = $model['bookid'];
 		
-		$result = $conn->getResult("select bookid from elibrary where bookid = $bookid;", true);
+		$result = $conn->getResult("select bookid from elibrary where bookid = $bookid;");
 		
 		if($result === false){
 			$model['valid'] = false;
@@ -35,7 +35,7 @@ class ElibraryRemoveContext implements ContextService {
 		}
 		
 		$model['valid'] = true;
-		$model['stgid'] = $result[0];
+		$model['spid'] = $bookid;
 		return $model;
 	}
 	

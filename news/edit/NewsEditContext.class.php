@@ -4,7 +4,7 @@ require_once(SBINTERFACES);
 /**
  *	NewsEditContext class
  *
-*	@param newstitle	      	string			News title
+ *	@param newstitle	      	string			News title
  *	@param newstime	      	string			News Time
  *	@param newscontent		  		string			News Content
  *	@param newsauthor	      		string			News Author
@@ -34,9 +34,10 @@ class NewsEditContext implements ContextService {
 		$newstime = $model['newstime'];
 		$newscontent = $conn->escape($model['newscontent']);
 		$newsauthor = $conn->escape($model['newsauthor']);
+		$newsdescription = $conn->escape($model['newsdescription']);
 		$newsexpiry = $model['newsexpiry'];
 		
-		$result = $conn->getResult("update news set newstitle = '$newstitle', newscontent = '$newscontent', newstime = $newstime, newsauthor = '$newsauthor', newsexpiry = $newsexpiry where newsid = $newsid;", true);
+		$result = $conn->getResult("update news set newstitle = '$newstitle', newscontent = '$newscontent', newstime = $newstime, newsauthor = '$newsauthor', newsexpiry = $newsexpiry, newsdescription = '$newsdescription' where newsid = $newsid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;

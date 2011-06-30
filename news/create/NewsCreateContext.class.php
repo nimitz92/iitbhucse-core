@@ -25,10 +25,32 @@ class NewsCreateContext implements ContextService {
 		$newstitle = $conn->escape($model['newstitle']);
 		$newstime = $model['newstime'];
 		$newscontent = $conn->escape($model['newscontent']);
-		$newsauthor = $conn->escape($model['newsauthor']);		
+		$newsauthor = $conn->escape($model['newsauthor']);
+		$newsdescription = $conn->escape($model['newsdescription']);
 		$newsexpiry = $model['newsexpiry'];
 		
-		$result = $conn->getResult("insert into news (newstitle, newstime, newscontent, newsauthor, newsexpiry) values ('$newstitle', $newstime, '$newscontent', '$newsauthor', $newsexpiry);", true);
+		$result = $conn->getResult("insert into news (newstitle, newstime, newscontent, newsauthor, newsexpiry, newsdescription) values ('$newstitle', $newstime, '$newscontent', '$newsauthor', $newsexpiry, '$newsdescription');", true);
+		
+		if($result === false){
+			$model['valid'] = false;
+			$model['msg'] = 'Error in Database @getcontext/news.create';
+			return $model;
+		}
+		
+		$model['newsid'] = $conn->getAutoId();
+		$model['valid'] = true;
+		return $model;
+	}
+	
+	/**
+	 *	@interface ContextService
+	**/
+	public function setContext($context){
+		$conn = $model['conn'];
+		$newsattachment = $model['spid'];
+		$newsid = $model['newsid'];
+		
+		$result = $conn->getResult("update news set newsattachment = $newsattachment where newsid = $newsid;", true);
 		
 		if($result === false){
 			$model['valid'] = false;
@@ -37,15 +59,6 @@ class NewsCreateContext implements ContextService {
 		}
 		
 		$model['valid'] = true;
-		$model['fid'] = $fid;
-		return $model;
-	}
-	
-	/**
-	 *	@interface ContextService
-	**/
-	public function setContext($context){
-		
 		return $model;
 	}
 }
