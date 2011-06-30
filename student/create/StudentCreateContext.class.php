@@ -7,6 +7,7 @@ require_once(SBINTERFACES);
  *	@param stname				string			Student name
  *	@param strollno			string			Student roll no
  *	@param stemail				string			Student email
+ *	@param stphone			string			Student phone
  *	@param stcourse			integer			Student course 1=BTech 2=IDD 3=PhD
  *	@param styear				integer			Student year
  *  @param ststatus     		integer			Student Status 1=ENROLLED 2=ALUMNUS
@@ -46,6 +47,7 @@ class StudentCreateContext implements ContextService {
 		$stname = $conn->escape($model['stname']);
 		$strollno = $conn->escape($model['strollno']);
 		$stemail = $conn->escape($model['stemail']);
+		$stphone = $conn->escape($model['stphone']);
 		$stcourse = $model['stcourse'];
 		$styear = $model['styear'];	
 		$stphone = $conn->escape($model['stphone']);

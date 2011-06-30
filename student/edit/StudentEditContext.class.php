@@ -11,6 +11,7 @@ require_once(SBINTERFACES);
  *	@param strollno		string			Student roll no
  *	@param stcourse		integer			Student course 1=BTech 2=IDD 3=PhD
  *	@param styear			integer			Student year
+ *	@param stphone		string			Student phone
  *  @param stinterest   	string          	Student Interest
  *  @param stcgpa      	string          	Student CGPA
  *  @param stplacement 	string          	Student Placement Status
@@ -39,6 +40,7 @@ class StudentEditContext implements ContextService {
 		$stuid = $model['stuid'];
 		$admin = isset($model['admin']) ? $model['admin'] : false;
 		
+		$stphone = $conn->escape($model['stphone']);
 		$stcgpa = $conn->escape($model['stcgpa']);
 		$stphone = $conn->escape($model['stphone']);
 		$stinterest = $model['stinterest'];
@@ -58,13 +60,9 @@ class StudentEditContext implements ContextService {
 			$result = $conn->getResult("update students set stcgpa = '$stcgpa', stphone = '$stphone', stinterest = '$stinterest' where stuid = $stuid;", true);
 		}
 		
-		
-		
-		
-		
 		if($result === false){
 			$model['valid'] = false;
-			$model['msg'] = 'Error in Database @setContext/student.edit';
+			$model['msg'] = 'Error in Database @setContext/student.edit : '.$conn->getError();
 			return $model;
 		}
 		
