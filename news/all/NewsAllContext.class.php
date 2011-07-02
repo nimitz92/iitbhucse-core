@@ -19,7 +19,7 @@ class NewsAllContext implements ContextService {
 	
 		$conn = $model['conn'];
 		
-		$result = $conn->getResult("select * from news;", true);
+		$result = $conn->getResult("select * from news order by newstime desc;");
 		
 		if($result === false){
 			$model['valid'] = false;
@@ -34,7 +34,7 @@ class NewsAllContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		
 		return $model;
 	}

@@ -1,5 +1,6 @@
  <?php 
 require_once(SBINTERFACES);
+require_once(SBROOT. 'lib/util/Time.class.php');
 
 /**
  *	NewsCreateContext class
@@ -23,11 +24,11 @@ class NewsCreateContext implements ContextService {
 	public function getContext($model){
 		$conn = $model['conn'];
 		$newstitle = $conn->escape($model['newstitle']);
-		$newstime = $model['newstime'];
+		$newstime = Time::getTime();
 		$newscontent = $conn->escape($model['newscontent']);
 		$newsauthor = $conn->escape($model['newsauthor']);
 		$newsdescription = $conn->escape($model['newsdescription']);
-		$newsexpiry = $model['newsexpiry'];
+		$newsexpiry = $newstime + ($model['newsexpiry'] * 24 * 60 * 60);
 		
 		$result = $conn->getResult("insert into news (newstitle, newstime, newscontent, newsauthor, newsexpiry, newsdescription) values ('$newstitle', $newstime, '$newscontent', '$newsauthor', $newsexpiry, '$newsdescription');", true);
 		
@@ -45,7 +46,7 @@ class NewsCreateContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
 		$newsattachment = $model['spid'];
 		$newsid = $model['newsid'];

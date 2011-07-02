@@ -1,5 +1,6 @@
 <?php 
 require_once(SBINTERFACES);
+require_once(SBROOT. 'lib/util/Time.class.php');
 
 /**
  *	NewsEditContext class
@@ -27,15 +28,15 @@ class NewsEditContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
 		$newsid = $model['newsid'];
 		$newstitle = $conn->escape($model['newstitle']);
-		$newstime = $model['newstime'];
+		$newstime = Time::getTime();
 		$newscontent = $conn->escape($model['newscontent']);
 		$newsauthor = $conn->escape($model['newsauthor']);
 		$newsdescription = $conn->escape($model['newsdescription']);
-		$newsexpiry = $model['newsexpiry'];
+		$newsexpiry = $newstime + ($model['newsexpiry'] * 24 * 60 * 60);
 		
 		$result = $conn->getResult("update news set newstitle = '$newstitle', newscontent = '$newscontent', newstime = $newstime, newsauthor = '$newsauthor', newsexpiry = $newsexpiry, newsdescription = '$newsdescription' where newsid = $newsid;", true);
 		

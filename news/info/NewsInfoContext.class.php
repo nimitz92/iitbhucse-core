@@ -44,7 +44,11 @@ class NewsInfoContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
+		$ft = $model['news']['newsexpiry'];
+		$pt = $model['news']['newstime'];
+		$timeDifference = ($ft - $pt);
+		$model['news']['newsexpiry'] = $timeDifference/(60*60*24);
 		return $model;
 	}
 }

@@ -42,7 +42,7 @@ class NewsDeleteContext implements ContextService {
 	/**
 	 *	@interface ContextService
 	**/
-	public function setContext($context){
+	public function setContext($model){
 		$conn = $model['conn'];
 		$newsid = $model['newsid'];	
 		
