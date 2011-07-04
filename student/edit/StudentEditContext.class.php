@@ -42,7 +42,6 @@ class StudentEditContext implements ContextService {
 		
 		$stphone = $conn->escape($model['stphone']);
 		$stcgpa = $conn->escape($model['stcgpa']);
-		$stphone = $conn->escape($model['stphone']);
 		$stinterest = $model['stinterest'];
 		
 		if($admin){

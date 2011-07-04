@@ -24,11 +24,12 @@ class CourseAllContext implements ContextService {
 		
 		$allparts = isset($model['allparts']);
 		$getparts = isset($model['getparts']);
+		$admin = isset($model['admin']);
 		
 		if($getparts){
 			$result = $conn->getResult("select distinct crspart from courses order by crspart ");
 		}  
-		else if($allparts){
+		else if($allparts || $admin){
 			$result = $conn->getResult("select * from courses order by crspart ");
 		}
 		else{

@@ -33,14 +33,24 @@ class FacultyEditContext implements ContextService {
 	public function setContext($model){
 		$conn = $model['conn'];
 		$fid = $model['fid'];
+		$admin = isset($model['admin']) ? $model['admin'] : false;
+
+		$fphone = $conn->escape($model['fphone']);
+		$finterest = $conn->escape($model['finterest']);
+		
+		if($admin){
 		$fname = $conn->escape($model['fname']);
 		$fdesignation = $model['fdesignation'];
-		$fphone = $conn->escape($model['fphone']);
-		$fqualification = $conn->escape($model['fqualification']);
-		$finterest = $conn->escape($model['finterest']);
 		$fstatus = $model['fstatus'];
+		$fqualification = $conn->escape($model['fqualification']);
 		
 		$result = $conn->getResult("update faculty set fname = '$fname', fphone = '$fphone', fdesignation = $fdesignation, fqualification = '$fqualification', finterest = '$finterest', fstatus = $fstatus where fid = $fid;", true);
+		}
+		else{
+			$result = $conn->getResult("update faculty set fphone = '$fphone', finterest = '$finterest' where fid = $fid;", true);
+		}
+		
+		
 		
 		if($result === false){
 			$model['valid'] = false;
