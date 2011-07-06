@@ -19,9 +19,34 @@ class StudentDeleteTransform implements TransformService {
 		$cl = new ComponentLoader();
 		
 		$op = $cl->load("user.delete", ECROOT);
+		$model['uid'] = $model['student']['stuid'];
 		$model = $kernel->run($op, $model);
 		
-		return $model;
+		if(!$model['valid'])
+			return $model;
+		
+		$op = $cl->load("content.delete", ECROOT);
+		$model['cntid'] = $model['student']['sthome'];
+		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
+			
+		$op = $cl->load("space.remove", ECROOT);
+		$model['spid'] = $model['student']['stphoto'];
+		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
+			
+		$op = $cl->load("space.remove", ECROOT);
+		$model['spid'] = $model['student']['stresume'];
+		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
+			
+		return $model;	
 	}
 }
 

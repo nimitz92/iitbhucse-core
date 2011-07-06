@@ -13,6 +13,12 @@ class NewsDeleteTransform implements TransformService {
 	 *	@interface TransformService
 	**/
 	public function transform($model){
+		$kernel = new ServiceKernel();
+		$cl = new ComponentLoader();
+	
+		$op = $cl->load("space.remove", ECROOT);
+		$model['spid'] = $model['news']['newsattachment'];
+		$model = $kernel->run($op, $model);
 		
 		return $model;
 	}

@@ -19,7 +19,32 @@ class FacultyDeleteTransform implements TransformService {
 		$cl = new ComponentLoader();
 		
 		$op = $cl->load("user.delete", ECROOT);
+		$model['uid'] = $model['faculty']['fid'];
 		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
+		
+		$op = $cl->load("content.delete", ECROOT);
+		$model['cntid'] = $model['faculty']['fhome'];
+		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
+			
+		$op = $cl->load("space.remove", ECROOT);
+		$model['spid'] = $model['faculty']['fphoto'];
+		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
+			
+		$op = $cl->load("space.remove", ECROOT);
+		$model['spid'] = $model['faculty']['fresume'];
+		$model = $kernel->run($op, $model);
+		
+		if(!$model['valid'])
+			return $model;
 		
 		return $model;
 	}

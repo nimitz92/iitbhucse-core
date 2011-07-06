@@ -20,7 +20,7 @@ class FacultyDeleteContext implements ContextService {
 	$conn = $model['conn'];
 		$fid = $model['fid'];
 		
-		$query = "select fid from faculty where fid=$fid";
+		$query = "select * from faculty where fid=$fid";
 		$result = $conn->getResult($query);
 		
 		if($result === false){
@@ -34,7 +34,7 @@ class FacultyDeleteContext implements ContextService {
 			$model['msg'] = 'Invalid Faculty ID';
 			return $model;
 		}
-		$model['uid'] = $fid;
+		
 		$model['faculty'] = $result[0];
 		return $model;
 	}
@@ -44,7 +44,7 @@ class FacultyDeleteContext implements ContextService {
 	**/
 	public function setContext($model){
 		$conn = $model['conn'];
-		$fid = $model['uid'];	
+		$fid = $model['fid'];	
 		
 		$result = $conn->getResult("delete from faculty where fid=$fid;", true);
 		

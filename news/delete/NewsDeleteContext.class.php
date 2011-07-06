@@ -20,7 +20,7 @@ class NewsDeleteContext implements ContextService {
 	$conn = $model['conn'];
 		$newsid = $model['newsid'];
 		
-		$query = "select newsid from news where newsid=$newsid";
+		$query = "select * from news where newsid=$newsid";
 		$result = $conn->getResult($query);
 		
 		if($result === false){

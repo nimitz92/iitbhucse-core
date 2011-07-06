@@ -20,7 +20,7 @@ class StudentDeleteContext implements ContextService {
 		$conn = $model['conn'];
 		$stuid = $model['stuid'];
 		
-		$query = "select stuid from students where stuid=$stuid";
+		$query = "select stuid, stphoto, stresume, sthome from students where stuid=$stuid";
 		$result = $conn->getResult($query);
 		
 		if($result === false){
@@ -35,7 +35,7 @@ class StudentDeleteContext implements ContextService {
 			return $model;
 		}
 		
-		$model['uid'] = $stuid;
+		$model['student'] = $result[0];
 		return $model;
 	}
 	
