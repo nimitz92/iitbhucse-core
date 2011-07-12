@@ -18,9 +18,16 @@ class NewsAllContext implements ContextService {
 	public function getContext($model){
 	
 		$conn = $model['conn'];
+		$admin = isset($model['admin']) ? $model['admin'] : false;
+		$top = isset($model['count']) ? $model['count'] : 5;
+		$all = isset($model['all']) ? $model['all'] : false;
 		
-		$result = $conn->getResult("select * from news order by newstime desc;");
-		
+		if($admin || $all){
+			$result = $conn->getResult("select *, (select size from storages where stgid = (select stgid from spaces where spid=newsattachment)) as newssize from news order by newstime desc;");
+		}
+		else{
+			$result = $conn->getResult("select * from news order by newstime desc limit $top;");
+		}
 		if($result === false){
 			$model['valid'] = false;
 			$model['msg'] = 'Error in Database @setContext/news.all';

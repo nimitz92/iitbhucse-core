@@ -21,7 +21,7 @@ class NewsInfoContext implements ContextService {
 		$conn = $model['conn'];
 		$newsid = $model['newsid'];
 		
-		$query = "select * from News where newsid=$newsid";
+		$query = "select *, (select size from storages where stgid = (select stgid from spaces where spid=newsattachment)) as newssize from news where newsid=$newsid;";
 		$result = $conn->getResult($query);
 		
 		if($result === false){
@@ -45,9 +45,9 @@ class NewsInfoContext implements ContextService {
 	 *	@interface ContextService
 	**/
 	public function setContext($model){
-		$ft = $model['news']['newsexpiry'];
-		$pt = $model['news']['newstime'];
-		$timeDifference = ($ft - $pt);
+		$et = $model['news']['newsexpiry'];
+		$ct = $model['news']['newstime'];
+		$timeDifference = ($et - $ct);
 		$model['news']['newsexpiry'] = $timeDifference/(60*60*24);
 		return $model;
 	}
